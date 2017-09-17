@@ -1,0 +1,3 @@
+images
+captcha
+users and groups(readers and moderators)
