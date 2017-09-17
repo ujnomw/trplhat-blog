@@ -10,6 +10,7 @@ class Post(models.Model):
             default=timezone.now)
     published_date = models.DateTimeField(
             blank=True, null=True)
+    words_to_cut=10
 
     def publish(self):
         self.published_date = timezone.now()
@@ -21,6 +22,9 @@ class Post(models.Model):
 
     def __str__(self):
         return self.title
+
+    def get_cut(self):
+        return ((' '.join(self.text.split(' ')[:self.words_to_cut]))+'...'*(self.words_to_cut < len(self.text.split(' '))))
 
 class Comment(models.Model):
     post = models.ForeignKey('blog.Post', related_name='comments')
