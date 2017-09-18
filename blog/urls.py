@@ -2,6 +2,9 @@ from django.conf.urls import url, include
 from . import views
 from django.contrib import admin
 from django.views.generic.base import RedirectView
+from django.conf import settings
+from django.conf.urls.static import static
+
 
 urlpatterns = [
     url(r'^$', views.post_list, name='post_list'),
@@ -16,4 +19,4 @@ urlpatterns = [
     url(r'^comment/(?P<pk>\d+)/approve/$', views.comment_approve, name='comment_approve'),
     url(r'^comment/(?P<pk>\d+)/remove/$', views.comment_remove, name='comment_remove'),
     #url(r'^accounts/login/$', views.login, name='login'),
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
