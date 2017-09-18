@@ -7,6 +7,9 @@
                     {{ post.published_date }} by {{post.author}}
                 </div>
                 <h1><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a></h1>
+                {% if post.picture %}
+                  <p><img src="{{ post.picture.url }}" width="189" height="255"></p>
+                {% endif %}
                 <p>{{ post.text|truncatechars:200 }}</p>
                 <a class="btn btn-default" href="{% url 'post_detail' pk=post.pk %}">Read More</a>
                 <br />
