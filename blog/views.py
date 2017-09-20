@@ -20,7 +20,6 @@ def post_new(request):
             form = PostForm(request.POST or None, request.FILES or None)
             if form.is_valid():
                 post = form.save(commit=False)
-                #post = Post(picture=request.FILES['picture'])
                 post.author = request.user
                 post.save()
                 return redirect('post_detail', pk=post.pk)

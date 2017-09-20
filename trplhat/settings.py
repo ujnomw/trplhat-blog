@@ -14,7 +14,7 @@ https://docs.djangoproject.com/en/1.8/ref/settings/
 import os
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
+# BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.8/howto/deployment/checklist/
@@ -25,7 +25,7 @@ SECRET_KEY = 'e82g6$d=0t7ce!bm^$8d3e95d%0^w99h%#=c&4i0&xy2^j0-=0'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -99,6 +99,7 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
+# PROJECT_DIR_PATH = path.dirname(path.normpath(path.abspath(__file__)))
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
@@ -106,4 +107,19 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 LOGIN_REDIRECT_URL = '/'
 
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'blog/media')
+
+
+import dj_database_url
+DATABASES['default'] = dj_database_url.config()
+
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
+ALLOWED_HOSTS = ['*']
+
+DEBUG = False
+
+try:
+    from .local_settings import *
+except ImportError:
+    pass

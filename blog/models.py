@@ -11,7 +11,7 @@ class Post(models.Model):
             default=timezone.now)
     published_date = models.DateTimeField(
             blank=True, null=True)
-    picture = models.FileField(null=True, blank = True)
+    picture = models.FileField( null=True, blank = True)
     words_to_cut=10
 
     def publish(self):
