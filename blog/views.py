@@ -1,9 +1,9 @@
-from django.shortcuts import render, get_object_or_404, redirect
+from django.shortcuts import render, get_object_or_404, redirect, render_to_response
 from django.utils import timezone
-from .models import Post, Comment
-from .forms import PostForm, CommentForm
+from .models import Post, Comment, TestFileContainer
+from .forms import PostForm, CommentForm, ContForm
 from django.contrib.auth.decorators import login_required
-
+from django.template import RequestContext
 
 def post_list(request):
     posts = Post.objects.filter(published_date__lte=timezone.now()).order_by("-published_date")
@@ -86,3 +86,21 @@ def comment_remove(request, pk):
     comment = get_object_or_404(Comment, pk=pk)
     comment.delete()
     return redirect('post_detail', pk=comment.post.pk)
+
+@login_required
+def cont(request):
+    if request.method == 'POST':
+        form = ContForm(request.POST ,request.FILES)
+        if form.is_valid():
+            con = TestFileContainer(cont=request.FILES['cont'])
+            con.save()
+            return redirect('cont')
+    else:
+        form = ContForm()
+    #return render(request, 'blog/cont.html', {'form': form})
+    contens = TestFileContainer.objects.all()
+
+    return render_to_response(
+        'blog/cont.html',
+        {'contens': contens, 'form': form},
+        context_instance=RequestContext(request))
