@@ -1,0 +1,18 @@
+{% extends 'blog/base.html' %}
+
+  {% block content %}
+  {% if contens %}
+          <ul>
+              {% for cont in contens %}
+                  <li><a href="{{ document.cont.url }}">a</a></li>
+              {% endfor %}
+          </ul>
+      {% else %}
+          <p>No documents.</p>
+      {% endif %}
+      <form method="POST" class="post-form" enctype="multipart/form-data">{% csrf_token %}
+          {{ form.as_p }}
+          <button type="submit" class="save btn btn-default">Save</button>
+      </form>
+
+  {% endblock %}

@@ -41,3 +41,6 @@ class Comment(models.Model):
 
     def __str__(self):
         return self.text
+class TestFileContainer(models.Model):
+    cont = models.FileField()
+    
