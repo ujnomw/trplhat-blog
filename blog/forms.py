@@ -15,7 +15,4 @@ class CommentForm(forms.ModelForm):
         fields = ('author', 'text',)
 
 class ContForm(forms.ModelForm):
-
-    class Meta:
-        model = TestFileContainer
-        fields = ('cont',)
+    cont = forms.FileField()
